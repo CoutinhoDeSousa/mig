@@ -50,33 +50,34 @@
     var margin = {top: 20, right: 20, bottom: 30, left: 60},
         width = 860 - margin.left - margin.right+legend_width,
         height = 500 - margin.top - margin.bottom;
+    //var x = d3.scaleOrdinal()
+    /*
+    var x = d3.scaleOrdinal();
+      //  .rangeRoundBands([0, width], .1);
 
-    var x = d3.scale.ordinal()
-        .rangeRoundBands([0, width], .1);
-
-    var yAbsolute = d3.scale.linear() // for absolute scale
+    var yAbsolute = d3.scaleLinear() // for absolute scale
         .rangeRound([height, 0]);
 
-    var yRelative = d3.scale.linear() // for absolute scale
+    var yRelative = d3.scaleLinear() // for absolute scale
         .rangeRound([height, 0]);
 
-    var color = d3.scale.ordinal()
+    var color = d3.scaleOrdinal()
         .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
 
-    var xAxis = d3.svg.axis()
+    var xAxis = d3.svg
         .scale(x)
         .orient("bottom");
 
-    var yAxisRelative = d3.svg.axis()
+    var yAxisRelative = d3.svg
         .scale(yRelative)
         .orient("left")
         .tickFormat(d3.format(".1%"));
 
-    var yAxisAbsolute = d3.svg.axis()
+    var yAxisAbsolute = d3.svg
         .scale(yAbsolute)
         .orient("left")
         .tickFormat(d3.format(".2s"));
-
+*/
     var svg = d3.select("body").append("svg")
         .attr("width", width + margin.left + margin.right+legend_width)
         .attr("height", height + margin.top + margin.bottom)
@@ -85,7 +86,7 @@
 
     //Data load
     d3.csv("daten.csv", function(error, data) {
-        color.domain(d3.keys(data[1]).filter(function(key){return key != 'type'}))
+       // color.domain(d3.keys(data[1]).filter(function(key){return key != 'type'}))
         if (error) throw error;
         let ages = [];
 
@@ -104,7 +105,7 @@
             for(let i = 0; i < d.ages.length; i++){
                 d.amount+= +d.ages[i];
             }
-            for(let i=0; i < d.)
+            //for(let i=0; i < d.)
         });
 
         console.log(data);
