@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+    body {
+        font: 10px sans-serif;
+    }
+
+    .axis path,
+    .axis line {
+        fill: none;
+        stroke: #000;
+        shape-rendering: crispEdges;
+    }
+
+    .bar {
+        fill: steelblue;
+    }
+
+    .x.axis path {
+        display: none;
+    }
+
+    .tooltip{
+        text-anchor: middle;
+        font-family: sans-serif;
+        font-size: 12px;
+        font-weight: bold;
+        fill:green;
+    }
+
+
+    .node.active {
+        fill: blue;
+    }
+
+</style>
+<body>
+
+<!-- load the d3.js library -->
+<script src="https://d3js.org/d3.v4.min.js"></script>
+
+
+<script>
+
+    /*vorbereiten*/
+
+    var legend_width = 120;
+
+    var margin = {top: 20, right: 20, bottom: 30, left: 60},
+        width = 860 - margin.left - margin.right+legend_width,
+        height = 500 - margin.top - margin.bottom;
+
+    var x = d3.scale.ordinal()
+        .rangeRoundBands([0, width], .1);
+
+    var yAbsolute = d3.scale.linear() // for absolute scale
+        .rangeRound([height, 0]);
+
+    var yRelative = d3.scale.linear() // for absolute scale
+        .rangeRound([height, 0]);
+
+    var color = d3.scale.ordinal()
+        .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+
+    var xAxis = d3.svg.axis()
+        .scale(x)
+        .orient("bottom");
+
+    var yAxisRelative = d3.svg.axis()
+        .scale(yRelative)
+        .orient("left")
+        .tickFormat(d3.format(".1%"));
+
+    var yAxisAbsolute = d3.svg.axis()
+        .scale(yAbsolute)
+        .orient("left")
+        .tickFormat(d3.format(".2s"));
+
+    var svg = d3.select("body").append("svg")
+        .attr("width", width + margin.left + margin.right+legend_width)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    //Data load
+    d3.csv("daten.csv", function(error, data) {
+        color.domain(d3.keys(data[1]).filter(function(key){return key != 'type'}))
+        if (error) throw error;
+        let ages = [];
+
+        // format the data
+        data.forEach(function (d) {
+            d.year = +d.year;
+            d.type =  d.type;
+            d.gender = d.gender;
+            d.ages = [];
+            for(let i = 0; i < 100 ; i++){
+                let age = i.toString();
+                //d.ages.concat(d[age]);
+                d.ages.push(parseFloat(d[age]));
+            }
+            d.amount = 0;
+            for(let i = 0; i < d.ages.length; i++){
+                d.amount+= +d.ages[i];
+            }
+            for(let i=0; i < d.)
+        });
+
+        console.log(data);
+
+    });
+
+    // helper
+
+</script>
+
+</body>
+</html>
+<!--
+Links
+http://bl.ocks.org/yuuniverse4444/8b0e53f29e24e2bdb265
+http://bl.ocks.org/yuuniverse4444/raw/8b0e53f29e24e2bdb265/
+https://bl.ocks.org/mbostock/3886208
+
+-->
