@@ -48,7 +48,7 @@
     var legend_width = 120;
 
     var margin = {top: 20, right: 20, bottom: 30, left: 60},
-        width = 860 - margin.left - margin.right+legend_width,
+    width = 860 - margin.left - margin.right+legend_width,
         height = 500 - margin.top - margin.bottom;
     //var x = d3.scaleOrdinal()
     /*
@@ -109,11 +109,32 @@
         });
 
         console.log(data);
-
+        var xScale = d3.scaleLinear()
+            .domain([d3.min([0,d3.min(data,function(d){return d.year;})]),
+                d3.max([0,d3.max(data,function(d){return d.year;})])
+            ]
+        ).range([0,width]);
+            .range([0,width]);
+        var yScale = d3.scaleLinear().domain(
+            [d3.min([0,d3.min(data,function(d){return d.amount;})]),
+                d3.max([0,d3.max(data,function(d){return d.amount;})])]
+        ).range([height,0]);
     });
-
+    /*
     // helper
+    function generateNextYear(data){
+        for(let i = 0; i < data.length; i++)
+        {
+            let a = data[i];
+            for (let j = 0 ; j < a.length;j++)
+            {
+                if(a[j] in range(0,100)){
 
+                }
+            }
+        }
+    }
+    */
 </script>
 
 </body>
